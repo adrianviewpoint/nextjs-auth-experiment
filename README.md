@@ -1,6 +1,39 @@
 # nextjs-auth-experiment
 
-Minimal Next.js app (TypeScript, App Router) designed to be a clean base for experimenting with NextAuth.
+A Minimal app designed to be a clean base for experimenting with auth.
+
+- Next.js
+- Typescript
+- TailwindCSS
+- Prisma (postgress)
+- Better Auth
+
+## Quickstart (new contributors)
+
+Prerequisites:
+
+- Node.js 20+ and npm
+- Docker Desktop to run the postgress database
+
+Steps:
+
+1) Install dependencies
+  - `npm install`
+2) Set environment (local defaults)
+  - `cp .env.example .env && cp .env.example .env.local`
+3) Start Postgres database
+  - `docker compose up -d`
+4) Generate Better Auth schema (ok to skip if already generated)
+  - `npm run auth:generate`
+5) Generate Prisma client
+  - `npm run prisma:generate`
+6) Apply committed migrations (first-time setup)
+  - `npm run prisma:deploy`
+  - Use `npm run prisma:migrate` only when you actively change the schema and want to create new migrations
+7) Start the app
+  - `npm run dev`
+
+Open http://localhost:3000, try the sign up / sign in / sign out on the homepage, and check `/api/auth/*`.
 
 ## Structure
 
@@ -22,18 +55,6 @@ This layout keeps frontend and backend side-by-side and easy to find.
 - `npm run lint` — Lint the project
 - `npm run type-check` — TypeScript type check
 
-## Getting started
-
-1. Install dependencies
-2. Start the dev server
-3. Visit the homepage and try the API links
-
-Dev workflow:
-
-1. Start the dev server: `npm run dev`
-2. Use Tailwind utilities like `p-4`, `text-blue-600`, `mt-2` directly in components
-3. Build for production: `npm run build`
-
 ## Tailwind CSS (v4.1)
 
 This repo follows Tailwind 4.1’s zero‑config setup:
@@ -42,21 +63,20 @@ This repo follows Tailwind 4.1’s zero‑config setup:
 - PostCSS plugin: `@tailwindcss/postcss` (see `postcss.config.js`)
 - CSS entrypoint: `@import "tailwindcss";` in `src/app/globals.css`
 - Use utilities directly in components (we avoid heavy global `@apply`)
-
-## Next steps: Add NextAuth
-
-When you’re ready to add NextAuth:
-
-1. Install the package and provider(s):
-   - `npm i next-auth`
-   - Optionally: `npm i @auth/core` (if using advanced adapters)
-2. Create the auth route at `src/app/api/auth/[...nextauth]/route.ts`.
-3. Add a simple sign-in button on the homepage and test a provider (e.g., GitHub, Google, Email).
-4. Store secrets in `.env.local` (already gitignored).
-
-See https://authjs.dev for up-to-date docs.
  
-## Better Auth (recommended for new apps)
+## Prisma (postgress)
+
+- First project authoring:
+  1) `auth:generate` writes Better Auth models into `prisma/schema.prisma`.
+  2) `prisma:migrate` (dev) creates SQL migration files capturing those changes; commit them.
+- New contributors:
+  1) Copy envs, start DB.
+  2) `prisma:deploy` applies the committed migrations to their local DB.
+  3) `prisma:generate` builds the Prisma client (also runs during `postinstall` if configured).
+- At runtime:
+  - Calls to `/api/auth/*` hit the Better Auth handler which uses Prisma to read/write users, sessions, accounts, etc., in Postgres.
+
+## Better Auth
 
 This project is wired for Better Auth with Prisma + Postgres. Files:
 
@@ -91,42 +111,3 @@ npm run dev
 ```
 
 Try the auth UI on the homepage and the API under `/api/auth/*`.
-
-## Quickstart (new contributors)
-
-Prerequisites:
-
-- Node.js 20+ and npm
-- Docker Desktop to run the postgress database
-
-Steps:
-
-1) Install dependencies
-  - `npm install`
-2) Set environment (local defaults)
-  - `cp .env.example .env && cp .env.example .env.local`
-3) Start Postgres database
-  - `docker compose up -d`
-4) Generate Better Auth schema (ok to skip if already generated)
-  - `npm run auth:generate`
-5) Generate Prisma client
-  - `npm run prisma:generate`
-6) Apply committed migrations (first-time setup)
-  - `npm run prisma:deploy`
-  - Use `npm run prisma:migrate` only when you actively change the schema and want to create new migrations
-
-## How the database gets created (overview)
-
-- First project authoring:
-  1) `auth:generate` writes Better Auth models into `prisma/schema.prisma`.
-  2) `prisma:migrate` (dev) creates SQL migration files capturing those changes; commit them.
-- New contributors:
-  1) Copy envs, start DB.
-  2) `prisma:deploy` applies the committed migrations to their local DB.
-  3) `prisma:generate` builds the Prisma client (also runs during `postinstall` if configured).
-- At runtime:
-  - Calls to `/api/auth/*` hit the Better Auth handler which uses Prisma to read/write users, sessions, accounts, etc., in Postgres.
-7) Start the app
-  - `npm run dev`
-
-Open http://localhost:3000, try the sign up / sign in / sign out on the homepage, and check `/api/auth/*`.
