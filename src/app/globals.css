@@ -1,11 +1,20 @@
+@import "tailwindcss";
+
+/* Optional Tailwind plugins — uncomment to enable */
+/* @import "tailwindcss/typography"; */
+/* @import "tailwindcss/forms"; */
+
+/* Minimal base styles */
 :root {
-  --font-sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
 }
+
 html, body {
   padding: 0;
   margin: 0;
   font-family: var(--font-sans);
 }
-a { color: #0366d6; text-decoration: none; }
+
+a { color: #2563eb; text-decoration: none; }
 a:hover { text-decoration: underline; }
 button { cursor: pointer; }

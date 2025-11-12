@@ -11,15 +11,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <header style={{ padding: "1rem", borderBottom: "1px solid #eee" }}>
-          <nav style={{ display: "flex", gap: "1rem" }}>
+        <header className="p-4 border-b border-gray-200">
+          <nav className="flex gap-4">
             <Link href="/">Home</Link>
-            <a href="/api/health" target="_blank">API: /api/health</a>
+            <a href="/api/health" target="_blank" className="text-blue-600">API: /api/health</a>
           </nav>
         </header>
-        <main style={{ padding: "1rem" }}>{children}</main>
-        <footer style={{ padding: "1rem", borderTop: "1px solid #eee", marginTop: "2rem", color: "#666" }}>
-          <small>nextjs-auth-experiment</small>
+        <main className="p-4">{children}</main>
+        <footer className="p-4 border-t border-gray-200 mt-8 text-gray-600">
+          <small className="text-sm">nextjs-auth-experiment</small>
         </footer>
       </body>
     </html>

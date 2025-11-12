@@ -16,26 +16,30 @@ export default function HomePage() {
   }
 
   return (
-    <section>
-      <h1>Next.js Auth Experiment</h1>
-      <p>This is a minimal Next.js app using the App Router.</p>
-      <ul>
+    <section className="space-y-4">
+      <h1 className="text-2xl font-semibold">Next.js Auth Experiment</h1>
+      <p className="text-gray-700">This is a minimal Next.js app using the App Router.</p>
+      <ul className="list-disc pl-5 space-y-2">
         <li>
-          Backend API example: <a href="/api/health" target="_blank" rel="noreferrer">GET /api/health</a>
+          Backend API example: <a href="/api/health" target="_blank" rel="noreferrer" className="text-blue-600">GET /api/health</a>
         </li>
         <li>
-          Backend API example: POST /api/echo
+          <div className="font-medium">Backend API example: POST /api/echo</div>
           <div>
-            <button onClick={callEcho} style={{ marginTop: "0.5rem" }}>Send sample POST</button>
+            <button onClick={callEcho} className="mt-2 inline-flex items-center rounded bg-blue-600 px-3 py-1.5 text-white hover:bg-blue-700">
+              Send sample POST
+            </button>
           </div>
           {echoResult && (
-            <pre style={{ background: "#f6f8fa", padding: "0.75rem", marginTop: "0.5rem", borderRadius: 6 }}>
+            <pre className="bg-gray-100 p-3 mt-2 rounded text-sm overflow-auto">
               {echoResult}
             </pre>
           )}
         </li>
       </ul>
-      <p>Next step: add NextAuth routes under <code>src/app/api/auth/[...nextauth]/route.ts</code>.</p>
+      <p className="text-gray-700">
+        Next step: add NextAuth routes under <code className="bg-gray-100 px-1 py-0.5 rounded">src/app/api/auth/[...nextauth]/route.ts</code>.
+      </p>
     </section>
   );
 }
