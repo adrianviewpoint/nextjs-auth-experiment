@@ -6,10 +6,16 @@
 
 // The corePlugins, safelist, and separator options from the JavaScript-based config are not supported in v4.0. To safelist utilities in v4 use @source inline().
 
-
 // This project uses the zero-config setup via the `@tailwindcss/postcss` plugin
 // and `@import "tailwindcss";` in `src/app/globals.css`.
 //
 // A Tailwind config file isn't required. If you later need customization, you can convert this into a
-// proper config (JS/TS) and export the options accordingly.
-module.exports = {};
+// proper config and export the options accordingly.
+
+// You can optionally add typing with:
+// import type { Config } from 'tailwindcss';
+// const config: Config = { /* ... */ };
+// export default config;
+
+const config = {};
+export default config;

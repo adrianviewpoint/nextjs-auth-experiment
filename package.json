@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint .",
+    "lint": "node --import tsx --no-warnings ./node_modules/eslint/bin/eslint.js . -c eslint.config.ts",
     "type-check": "tsc --noEmit",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
@@ -29,6 +29,7 @@
     "postcss": "^8.5.6",
     "prisma": "^6.19.0",
     "tailwindcss": "^4.1.17",
+    "tsx": "^4.19.0",
     "typescript": "latest"
   }
 }
